@@ -34,7 +34,10 @@
                     Text="{Binding Usuario.Password}"
                     TextColor="Black"
                     WidthRequest="333" />
-                <Button Command="{Binding LoginCommand}" Text="Iniciar" />
+                <Button
+                    x:Name="LoginBtn"
+                    Command="{Binding LoginCommand}"
+                    Text="Iniciar" />
             </StackLayout>
             <StackLayout>
                 <Label
