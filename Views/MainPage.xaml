@@ -29,7 +29,7 @@
                     PlaceholderColor="Gray"
                     TextColor="Black"
                     WidthRequest="333" />
-                <Button Text="Iniciar" />
+                <Button Command="{Binding LoginCommand}" Text="Iniciar" />
             </StackLayout>
             <StackLayout>
                 <Label
