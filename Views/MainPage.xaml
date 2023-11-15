@@ -18,13 +18,16 @@
                 WidthRequest="100" />
             <StackLayout Padding="40" Spacing="30">
                 <Entry
+                    x:Name="EmailEntry"
                     HorizontalOptions="Center"
+                    Keyboard="Email"
                     Placeholder="Email"
                     PlaceholderColor="Gray"
                     Text="{Binding Usuario.Email}"
                     TextColor="Black"
                     WidthRequest="333" />
                 <Entry
+                    x:Name="PasswordEntry"
                     HorizontalOptions="Center"
                     Placeholder="Contraseña"
                     PlaceholderColor="Gray"

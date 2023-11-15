@@ -34,7 +34,7 @@ namespace TecnologicoApp.ViewModels
 
             if (string.IsNullOrEmpty(Usuario.Password))
             {
-                await ShowToastAsync("Ingrese una Contraseña Válida");
+                await Util.ShowToastAsync("Ingrese una Contraseña Válida");
                 return;
             }
         }
