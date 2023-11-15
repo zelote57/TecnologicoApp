@@ -21,12 +21,14 @@
                     HorizontalOptions="Center"
                     Placeholder="Email"
                     PlaceholderColor="Gray"
+                    Text="{Binding Usuario.Email}"
                     TextColor="Black"
                     WidthRequest="333" />
                 <Entry
                     HorizontalOptions="Center"
                     Placeholder="Contraseña"
                     PlaceholderColor="Gray"
+                    Text="{Binding Usuario.Password}"
                     TextColor="Black"
                     WidthRequest="333" />
                 <Button Command="{Binding LoginCommand}" Text="Iniciar" />
