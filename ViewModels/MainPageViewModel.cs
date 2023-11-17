@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using TecnologicoApp.Model;
+using TecnologicoApp.Views;
 
 namespace TecnologicoApp.ViewModels
 {
@@ -37,6 +38,8 @@ namespace TecnologicoApp.ViewModels
                 await Util.ShowToastAsync("Ingrese una Contraseña Válida");
                 return;
             }
+
+            await Shell.Current.GoToAsync(nameof(WelcomePage));
         }
 
         private bool IsAValidEmail(string email)
