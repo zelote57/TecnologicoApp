@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
-using TecnologicoApp.Model;
+using TecnologicoApp.Models;
 using TecnologicoApp.Views;
 
 namespace TecnologicoApp.ViewModels

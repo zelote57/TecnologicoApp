@@ -1,4 +1,4 @@
-﻿namespace TecnologicoApp.Model
+﻿namespace TecnologicoApp.Models
 {
     public class UsuarioRegistro
     {
