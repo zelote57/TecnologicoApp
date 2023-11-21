@@ -27,9 +27,9 @@ namespace TecnologicoApp.ViewModels
 
         private async void LoginAsync()
         {
-            if (string.IsNullOrEmpty(Usuario.Email) || !IsAValidEmail(Usuario.Email))
+            if (string.IsNullOrEmpty(Usuario.Email) || !IsAValidEmail(Usuario.Email.ToLower()))
             {
-                await ShowToastAsync("Ingrese un Email Válido");
+                await Util.ShowToastAsync("Ingrese un Email Válido");
                 return;
             }
 
@@ -45,14 +45,6 @@ namespace TecnologicoApp.ViewModels
         private bool IsAValidEmail(string email)
         {
             return Regex.IsMatch(email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
-        }
-
-        private async Task ShowToastAsync(string message)
-        {
-            // implement your logic here
-            var toast = Toast.Make(message);
-            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
-            await toast.Show(cts.Token);
         }
 
         public void OnPropertyChanged([CallerMemberName] string name = "") =>
