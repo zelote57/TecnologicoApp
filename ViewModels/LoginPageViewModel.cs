@@ -19,7 +19,7 @@ namespace TecnologicoApp.ViewModels
         public LoginPageViewModel()
         {
             Usuario = new UsuarioRegistro();
-            LoginCommand = new Command(LoginAsync);
+            LoginCommand = new Command(LoginAsync);            
         }
 
         #region "Logic"
@@ -37,15 +37,47 @@ namespace TecnologicoApp.ViewModels
                 await Util.ShowToastAsync("Ingrese una Contraseña Válida");
                 return;
             }
+            
+            var loginData = GetLoginData();
+            
+            if (loginData != null && !loginData.Any())
+            {
+                await Util.ShowToastAsync("Configure usuarios");
+                return;
+            }
+            
+            var loginDataEmail = loginData.FirstOrDefault( x=> x.Key  == Usuario.Email);
+
+            if (loginDataEmail.Equals(default(KeyValuePair<string, string>)))
+            {
+                await Util.ShowToastAsync($"El correo {Usuario.Email} no existe");
+                return;
+            }
+
+            if (loginDataEmail.Value != Usuario.Password)
+            {
+                await Util.ShowToastAsync($"Contraseña Incorrecta");
+                return;
+            }
 
             Settings.IsAuthenticated = true;
-            
+            Settings.Email = Usuario.Email;
+
             await Shell.Current.GoToAsync($"///{nameof(WelcomePage)}");
         }
 
         private bool IsAValidEmail(string email)
         {
             return Regex.IsMatch(email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
+        }
+
+        private List<KeyValuePair<string, string>> GetLoginData()
+        {
+            return new List<KeyValuePair<string, string>>
+            {
+                new("gustavo@istlc.com", "Mama1234"),
+                new("betsabe@mail.com", "Papa1234")
+            };
         }
 
         public void OnPropertyChanged([CallerMemberName] string name = "") =>
