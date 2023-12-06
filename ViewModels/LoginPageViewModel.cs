@@ -14,12 +14,15 @@ namespace TecnologicoApp.ViewModels
 
         public Command LoginCommand { get; set; }
 
+        public Command RegisterCommand { get; set; }
+
         #endregion
 
         public LoginPageViewModel()
         {
             Usuario = new UsuarioRegistro();
-            LoginCommand = new Command(LoginAsync);            
+            LoginCommand = new Command(LoginAsync);
+            RegisterCommand = new Command(GoToSignupPageAsync);
         }
 
         #region "Logic"
@@ -37,16 +40,16 @@ namespace TecnologicoApp.ViewModels
                 await Util.ShowToastAsync("Ingrese una Contraseña Válida");
                 return;
             }
-            
+
             var loginData = GetLoginData();
-            
+
             if (loginData != null && !loginData.Any())
             {
                 await Util.ShowToastAsync("Configure usuarios");
                 return;
             }
-            
-            var loginDataEmail = loginData.FirstOrDefault( x=> x.Key  == Usuario.Email);
+
+            var loginDataEmail = loginData.FirstOrDefault(x => x.Key == Usuario.Email);
 
             if (loginDataEmail.Equals(default(KeyValuePair<string, string>)))
             {
@@ -69,6 +72,11 @@ namespace TecnologicoApp.ViewModels
         private bool IsAValidEmail(string email)
         {
             return Regex.IsMatch(email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
+        }
+
+        private async void GoToSignupPageAsync()
+        {
+            await Shell.Current.GoToAsync(nameof(SignupPage));
         }
 
         private List<KeyValuePair<string, string>> GetLoginData()
